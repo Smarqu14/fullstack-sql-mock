@@ -15,8 +15,12 @@ const helpers = {
       callback(err, results);
     })
   },
-  updateProductHelper: (callback) => {
-
+  updateProductHelper: (product, id, callback) => {
+    let { curr_bid } = product;
+    let queryStr = `UPDATE products SET curr_bid=${curr_bid} WHERE id=${id};`;
+    db.query(queryStr, (err, results) => {
+      callback(err, results);
+    })
   },
   deleteProductHelper: (callback) => {
 
