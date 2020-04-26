@@ -9,13 +9,28 @@ export default class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-
+      productList: []
     }
+    this.getProducts = this.getProducts.bind(this)
+  }
 
+  componentDidMount() {
+    this.getProducts();
+  }
+
+  getProducts() {
+    axios
+    .get('/name/products')
+    .then((data) => {
+      this.setState({
+        productList: data.data
+      })
+    })
+    .catch((err) => console.error(err))
   }
 
   render(){
-  
+    console.log(this.state.productList)
     return(
       <div>
         <div>
