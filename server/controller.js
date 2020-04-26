@@ -30,6 +30,13 @@ const controller = {
       if (err) { res.status(404).send(err) }
       res.status(200).send(results);
     })
+  },
+  getOne: (req, res) => {
+    let { id } = req.params;
+    helpers.getOneProduct(id, (err, results) => {
+      if (err) { res.status(404).send(err) }
+      res.status(200).json(results);
+    })
   }
 }
 

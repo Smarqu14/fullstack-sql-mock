@@ -19,7 +19,12 @@ export default class ProductViewer extends React.Component {
 
   submitPrice(e) {
     e.preventDefault()
-    this.props.updatePrice(this.props.product.id, this.state.newPrice)
+    if ( this.state.newPrice >this.props.product.curr_bid) {
+      this.props.updatePrice(this.props.product.id, this.state.newPrice)
+      window.alert(`Thank you for your bid of ${this.state.newPrice}!`)
+    } else {
+      window.alert(`${this.state.newPrice} is not a valid bid!`)
+    }
   }
 
   render(){

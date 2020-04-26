@@ -10,6 +10,7 @@ router
 
 router
   .route('/products/:id')
+  .get(controller.getOne)
   .put(controller.put)
   .delete(controller.delete)
 

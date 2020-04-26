@@ -27,6 +27,12 @@ const helpers = {
     db.query(queryStr, (err, results) => {
       callback(err, results);
     })
+  },
+  getOneProduct: (id, callback) => {
+    let queryStr = `SELECT * FROM products WHERE id=${id}`
+    db.query(queryStr, (err, results) => {
+      callback(err, results)
+    })
   }
 }
 

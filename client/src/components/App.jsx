@@ -2,6 +2,8 @@ import React from 'react';
 import ProductList from './ProductList.jsx';
 import ProductViewer from './ProductViewer.jsx';
 import Search from './Search.jsx';
+import Products from './Products.jsx';
+
 
 import axios from 'axios';
 
@@ -43,8 +45,14 @@ export default class App extends React.Component {
     .catch((err) => console.error(err))
   }
 
+  updatePage(currProduct) {
+    this.setState({
+      product: currProduct
+    })
+  }
+
   render(){
-    // console.log(this.state.productlist)
+    console.log('PRODUCT STATE: ', this.state.product)
     return(
       <div>
         <div>
@@ -61,7 +69,7 @@ export default class App extends React.Component {
             <ProductViewer updatePrice={this.updatePrice} product={this.state.product} />
           </div>
           <div className="col-md-5 product-list-container">
-            <ProductList productlist={this.state.productlist}/>
+            <ProductList productlist={this.state.productlist} updatePage={this.updatePage.bind(this)}/>
           </div>
         </div>
       </div>
