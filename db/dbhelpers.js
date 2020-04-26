@@ -22,8 +22,11 @@ const helpers = {
       callback(err, results);
     })
   },
-  deleteProductHelper: (callback) => {
-
+  deleteProductHelper: (id, callback) => {
+    let queryStr = `DELETE FROM products WHERE id=${id}`
+    db.query(queryStr, (err, results) => {
+      callback(err, results);
+    })
   }
 }
 
