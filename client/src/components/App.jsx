@@ -9,9 +9,11 @@ export default class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      productlist: []
+      productlist: [],
+      product: ''
     }
     this.getProducts = this.getProducts.bind(this)
+    this.updatePrice = this.updatePrice.bind(this)
   }
 
   componentDidMount() {
@@ -23,14 +25,26 @@ export default class App extends React.Component {
     .get('/name/products')
     .then((data) => {
       this.setState({
-        productlist: data.data
+        productlist: data.data,
+        product: data.data[0]
       })
     })
     .catch((err) => console.error(err))
   }
 
+  updatePrice(id, newPrice) {
+    axios
+    .put(`/name/products/${id}`, {
+      curr_bid: newPrice
+    })
+    .then(() => {
+      this.getProducts()
+    })
+    .catch((err) => console.error(err))
+  }
+
   render(){
-    console.log(this.state.productlist)
+    // console.log(this.state.productlist)
     return(
       <div>
         <div>
@@ -44,7 +58,7 @@ export default class App extends React.Component {
         </nav>
         <div className="row main-container">
           <div className="col-md-7 product-viewer-container">
-            <ProductViewer />
+            <ProductViewer updatePrice={this.updatePrice} product={this.state.product} />
           </div>
           <div className="col-md-5 product-list-container">
             <ProductList productlist={this.state.productlist}/>
