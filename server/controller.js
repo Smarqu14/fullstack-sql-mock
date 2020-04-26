@@ -17,7 +17,12 @@ const controller = {
     })
   },
   put: (req, res) => {
-
+    let { id } = req.params;
+    let product = req.body;
+    helpers.updateProductHelper(product, id, (err, results) => {
+      if (err) { res.status(404).send(err) }
+      res.status(200).send(results);
+    })
   },
   delete: (req, res) => {
 
