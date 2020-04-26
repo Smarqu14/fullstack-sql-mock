@@ -25,7 +25,11 @@ const controller = {
     })
   },
   delete: (req, res) => {
-
+    let { id } = req.params;
+    helpers.deleteProductHelper(id, (err, results) => {
+      if (err) { res.status(404).send(err) }
+      res.status(200).send(results);
+    })
   }
 }
 
